@@ -1,0 +1,22 @@
+<form [formGroup]="deleteTaskForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="title">Title of the Task to Delete:</label>
+    <input id="title" formControlName="title" />
+    <app-error-required-field-form
+      [showError]="(deleteTaskForm.get('title')?.hasError('required') && deleteTaskForm.get('title')?.touched) ?? false"
+      fieldName="Title">
+    </app-error-required-field-form>
+    <app-error-min-length-field-form
+      [showError]="(deleteTaskForm.get('title')?.hasError('minlength') && deleteTaskForm.get('title')?.touched) ?? false"
+      fieldName="Title"
+      [minLength]="3">
+    </app-error-min-length-field-form>
+    <app-error-max-length-field-form
+      [showError]="(deleteTaskForm.get('title')?.hasError('maxlength') && deleteTaskForm.get('title')?.touched) ?? false"
+      fieldName="Title"
+      [maxLength]="50">
+    </app-error-max-length-field-form>
+  </div>
+
+  <button type="submit" [disabled]="deleteTaskForm.invalid">Delete Task</button>
+</form>

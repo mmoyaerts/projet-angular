@@ -1,0 +1,53 @@
+<form [formGroup]="addTaskForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="title">Title:</label>
+    <input id="title" formControlName="title" />
+    <app-error-required-field-form
+      [showError]="(addTaskForm.get('title')?.hasError('required') && addTaskForm.get('title')?.touched) ?? false"
+      fieldName="Title">
+    </app-error-required-field-form>
+    <app-error-min-length-field-form
+      [showError]="(addTaskForm.get('title')?.hasError('minlength') && addTaskForm.get('title')?.touched) ?? false"
+      fieldName="Title"
+      [minLength]="3">
+    </app-error-min-length-field-form>
+    <app-error-max-length-field-form
+      [showError]="(addTaskForm.get('title')?.hasError('maxlength') && addTaskForm.get('title')?.touched) ?? false"
+      fieldName="Title"
+      [maxLength]="50">
+    </app-error-max-length-field-form>
+  </div>
+
+  <div>
+    <label for="description">Description:</label>
+    <input id="description" formControlName="description" />
+    <app-error-min-length-field-form
+      [showError]="(addTaskForm.get('description')?.hasError('minlength') && addTaskForm.get('description')?.touched) ?? false"
+      fieldName="Description"
+      [minLength]="10">
+    </app-error-min-length-field-form>
+    <app-error-max-length-field-form
+      [showError]="(addTaskForm.get('description')?.hasError('maxlength') && addTaskForm.get('description')?.touched) ?? false"
+      fieldName="Description"
+      [maxLength]="200">
+    </app-error-max-length-field-form>
+  </div>
+
+  <div>
+    <label for="date">Date:</label>
+    <input id="date" type="date" formControlName="date" />
+    <app-error-required-field-form
+      [showError]="(addTaskForm.get('date')?.hasError('required') && addTaskForm.get('date')?.touched) ?? false"
+      fieldName="Date">
+    </app-error-required-field-form>
+  </div>
+
+  <div>
+    <label for="state">State:</label>
+    <select id="state" formControlName="state">
+      <option *ngFor="let state of states" [value]="state">{{ state }}</option>
+    </select>
+  </div>
+
+  <button type="submit" [disabled]="addTaskForm.invalid">Add Task</button>
+</form>

@@ -1,0 +1,21 @@
+<p>task-list works!</p>
+
+<label for="state-select">Select State:</label>
+<select id="state-select" [(ngModel)]="selectedState" (change)="onStateChange()">
+  <option [value]="State.A_FAIRE">À FAIRE</option>
+  <option [value]="State.EN_COURS">EN COURS</option>
+  <option [value]="State.TERMINEE">TERMINÉE</option>
+</select>
+
+@for (task of tasks; track $index) {
+<div>
+  <app-task [currentTaskComponent]="task" ></app-task>
+
+  <button (click)="deleteTask(task.id)">Delete</button>
+  <button (click)="toggleTaskState(task)">
+    Next State
+  </button>
+</div>
+
+}
+
